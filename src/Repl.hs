@@ -6,6 +6,7 @@ where
 import           System.Console.Haskeline
 
 import           Parser
+import           Eval
 
 repl :: IO ()
 repl = runInputT defaultSettings loop
@@ -19,5 +20,5 @@ repl = runInputT defaultSettings loop
             Just input  -> do
                 case parse' input of
                     Left  err  -> outputStrLn $ show err
-                    Right expr -> outputStrLn $ show expr
+                    Right expr -> outputStrLn $ show $ eval expr
                 loop

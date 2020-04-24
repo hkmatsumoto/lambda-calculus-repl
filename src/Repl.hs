@@ -5,6 +5,8 @@ where
 
 import           System.Console.Haskeline
 
+import           Parser
+
 repl :: IO ()
 repl = runInputT defaultSettings loop
   where
@@ -15,5 +17,7 @@ repl = runInputT defaultSettings loop
             Nothing     -> return ()
             Just "quit" -> return ()
             Just input  -> do
-                outputStrLn input
+                case parse' input of
+                    Left  err  -> outputStrLn $ show err
+                    Right expr -> outputStrLn $ show expr
                 loop

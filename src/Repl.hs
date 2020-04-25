@@ -13,8 +13,8 @@ repl = runInputT defaultSettings loop
   where
     loop :: InputT IO ()
     loop = do
-        input <- getInputLine ">>> "
-        case input of
+        result <- getInputLine ">>> "
+        case result of
             Nothing     -> return ()
             Just "quit" -> return ()
             Just input  -> do
